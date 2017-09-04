@@ -5,13 +5,17 @@
  */
 package DAo;
 
+import Daros.pos;
+import java.util.ArrayList;
+
 /**
  *
  * @author Carlos
  */
 public class NewClass {
     public static void main(String[] args) {
-        Dao d=new Dao();
-        System.out.println(d.busqueda());
+        Dao d =new Dao();
+        ArrayList<pos> al=d.busqueda();
+        System.out.println(al);
     }
 }

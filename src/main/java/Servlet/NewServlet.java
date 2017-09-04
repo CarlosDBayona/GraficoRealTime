@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import DAo.Dao;
 import Daros.pos;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -53,8 +54,9 @@ public class NewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Gson g=new Gson();
+        Dao d=new Dao();
         ArrayList<pos> al=new ArrayList<>();
-        
+        al=d.busqueda();
         String json=g.toJson(al);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -28,37 +28,28 @@ public class Dao {
     ArrayList<pos> ans=new ArrayList();
         try
     {
-      // create our mysql database connection
-      String myDriver = "org.gjt.mm.mysql.Driver";
-      String myUrl = "jdbc:mysql://localhost/Edison";
-      Class.forName(myDriver);
+        String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
+        Class.forName("com.mysql.jdbc.Driver");
+      String myUrl = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
       Connection conn = DriverManager.getConnection(myUrl, "root", "");
-      
-      // our SQL SELECT query. 
-      // if you only need a few columns, specify them by name instead of using "*"
       String query = "SELECT hora,temp FROM Datos order by id desc limit 10";
-
-      // create the java statement
       Statement st = conn.createStatement();
-      
-      // execute the query, and get a java resultset
       ResultSet rs = st.executeQuery(query);
-      
-      // iterate through the java resultset
       while (rs.next())
       {
-          
         Date d=rs.getTimestamp("hora");
         float f=rs.getFloat("temp");
-        System.out.println(d.getTime());
+        pos p=new pos(f, d);
+        ans.add(p);
       }
-        
-      st.close();
+        rs.close();
+         st.close();
+         conn.close();
     }
     catch (Exception e)
     {
       System.err.println("Got an exception! ");
-      System.err.println(e.getMessage());
+      System.err.println(e.getCause());
     }
     
         return ans;

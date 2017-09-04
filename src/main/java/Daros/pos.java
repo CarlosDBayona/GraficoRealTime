@@ -18,6 +18,11 @@ import java.util.Locale;
 public class pos {
     long x=0;
     float y=0;
+
+    @Override
+    public String toString() {
+        return "pos{" + "x=" + x + ", y=" + y + '}';
+    }
     public pos(float f,Date d) {
         Date tod=d;
         x =tod.getTime();
