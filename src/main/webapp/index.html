@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <!-- EXAMPLE SCRIPT -->
+        
+    <script>
+      // onload callback
+      function drawChart() {
+
+        // JSONP request
+        setInterval(function(){
+        var jsonData = $.getJSON("NewServlet", function(result){
+        }).done(function(results){
+            
+          var data = new google.visualization.DataTable();
+          
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'y');
+          console.log("Holi");
+          $.each(results, function (index, pos) {
+              console.log(new Date(pos.x));
+            data.addRow([
+              (new Date(pos.x)),
+              parseFloat(pos.y)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+
+          chart.draw(data, {
+            title: 'Wimp Weather Station'
+          });
+
+        });
+    }, 3000);
+      }
+  
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+    </script>
+
+  </head>
+  <body>
+    <div id="chart" style="width: 100%;"></div>
+    <script> setInterval(drawChart(), 3000); </script>
+  </body>
+</html>
