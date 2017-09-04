@@ -9,7 +9,12 @@ import Daros.pos;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,20 +54,12 @@ public class NewServlet extends HttpServlet {
             throws ServletException, IOException {
         Gson g=new Gson();
         ArrayList<pos> al=new ArrayList<>();
-        pos k=new pos();
-        pos r=new pos();
-        pos miaw=new pos();
-        long lib=1504499576388l;
-        r.setX(lib);
-        long l=1504499809485l;
-        k.setX(l);
-        al.add(r);
-        al.add(k);
-        al.add(miaw);
+        
         String json=g.toJson(al);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+        
     }
 
     /**

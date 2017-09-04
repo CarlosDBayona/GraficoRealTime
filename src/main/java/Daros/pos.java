@@ -16,12 +16,12 @@ import java.util.Locale;
  * @author Carlos
  */
 public class pos {
-    long x;
-    float y;
-    public pos() {
-        Date tod = (Date) Calendar.getInstance().getTime(); 
+    long x=0;
+    float y=0;
+    public pos(float f,Date d) {
+        Date tod=d;
         x =tod.getTime();
-        y=(int) (Math.random()*100);
+        y=f;
     }
 
     public void setX(long x) {
