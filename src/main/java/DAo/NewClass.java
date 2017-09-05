@@ -6,7 +6,10 @@
 package DAo;
 
 import Daros.pos;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,7 +18,6 @@ import java.util.ArrayList;
 public class NewClass {
     public static void main(String[] args) {
         Dao d =new Dao();
-        ArrayList<pos> al=d.busqueda();
-        System.out.println(al);
+        d.busqueda();
     }
 }

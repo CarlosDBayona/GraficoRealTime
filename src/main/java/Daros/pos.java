@@ -5,11 +5,13 @@
  */
 package Daros;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  *
@@ -23,14 +25,22 @@ public class pos {
     public String toString() {
         return "pos{" + "x=" + x + ", y=" + y + '}';
     }
-    public pos(float f,Date d) {
-        Date tod=d;
-        x =tod.getTime();
+    public pos(float f,Timestamp d) {
+        Timestamp tod=d;
+        TimeZone t=TimeZone.getTimeZone("UTC-5");
+        SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        sdf.setTimeZone(t);
+        Date d1=new Date(sdf.format(tod));
+        x =d1.getTime();
         y=f;
     }
 
     public void setX(long x) {
         this.x = x;
+    }
+
+    public long getX() {
+        return x;
     }
 
 

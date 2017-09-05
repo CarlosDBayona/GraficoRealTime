@@ -6,8 +6,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,18 +31,17 @@ public class Dao {
     public ArrayList<pos> busqueda() {
     ArrayList<pos> ans=new ArrayList();
         try
-    {
-        String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
-        Class.forName("com.mysql.jdbc.Driver");
+    { 
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
       String myUrl = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
-      Connection conn = DriverManager.getConnection(myUrl, "root", "");
-      String query = "SELECT hora,temp FROM Datos order by id desc limit 10";
+      Connection conn = DriverManager.getConnection(myUrl, "root", "root");
+      String query = "SELECT celsius,hora FROM Datos order by id desc limit 50";
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery(query);
       while (rs.next())
       {
-        Date d=rs.getTimestamp("hora");
-        float f=rs.getFloat("temp");
+        Timestamp d=rs.getTimestamp("hora");
+        float f=rs.getFloat("celsius");
         pos p=new pos(f, d);
         ans.add(p);
       }
