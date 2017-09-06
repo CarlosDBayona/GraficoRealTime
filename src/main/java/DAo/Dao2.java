@@ -35,13 +35,13 @@ public class Dao2 {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
       String myUrl = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
       Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-      String query = "SELECT celsius,hora FROM Datos order by id desc limit 50";
+      String query = "SELECT thresh,hora FROM Datos order by id desc limit 50";
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery(query);
       while (rs.next())
       {
         Timestamp d=rs.getTimestamp("hora");
-        float f=rs.getFloat("celsius");
+        float f=rs.getFloat("thresh");
         pos p=new pos(f, d);
         ans.add(p);
       }

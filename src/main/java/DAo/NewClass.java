@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class NewClass {
     public static void main(String[] args) {
-        Dao d =new Dao();
+        Dao1 d =new Dao1();
         d.busqueda();
     }
 }

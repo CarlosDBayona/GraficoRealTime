@@ -19,7 +19,7 @@
           var data = new google.visualization.DataTable();
           
           data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'y');
+          data.addColumn('number', 'Temperature');
           console.log("Holi");
           $.each(results, function (index, pos) {
               console.log(new Date(pos.x));
@@ -53,13 +53,13 @@
 
         // JSONP request
         setInterval(function(){
-        var jsonData = $.getJSON("NewServlet", function(result){
+        var jsonData = $.getJSON("NewServletlux", function(result){
         }).done(function(results){
             
           var data = new google.visualization.DataTable();
           
           data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'y');
+          data.addColumn('number', 'Lux');
           console.log("Holi");
           $.each(results, function (index, pos) {
               console.log(new Date(pos.x));
@@ -72,7 +72,7 @@
           var chart = new google.visualization.LineChart($('#chart1').get(0));
 
           chart.draw(data, {
-            title: 'Wimp Weather Station'
+            title: 'Lux'
           });
 
         });
@@ -93,7 +93,7 @@
 
         // JSONP request
         setInterval(function(){
-        var jsonData = $.getJSON("NewServlet", function(result){
+        var jsonData = $.getJSON("NewServlet2", function(result){
         }).done(function(results){
             
           var data = new google.visualization.DataTable();
