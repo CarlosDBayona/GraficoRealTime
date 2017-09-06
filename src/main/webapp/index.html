@@ -9,7 +9,7 @@
         
     <script>
       // onload callback
-      function drawChart() {
+      function drawChartCelcius() {
 
         // JSONP request
         setInterval(function(){
@@ -32,6 +32,46 @@
           var chart = new google.visualization.LineChart($('#chart').get(0));
 
           chart.draw(data, {
+            title: 'Temperature'
+          });
+
+        });
+    }, 500);
+      }
+  
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+    </script>
+    <script>
+      // onload callback
+      function drawChartLux() {
+
+        // JSONP request
+        setInterval(function(){
+        var jsonData = $.getJSON("NewServlet", function(result){
+        }).done(function(results){
+            
+          var data = new google.visualization.DataTable();
+          
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'y');
+          console.log("Holi");
+          $.each(results, function (index, pos) {
+              console.log(new Date(pos.x));
+            data.addRow([
+              (new Date(pos.x)),
+              parseFloat(pos.y)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart1').get(0));
+
+          chart.draw(data, {
             title: 'Wimp Weather Station'
           });
 
@@ -47,10 +87,54 @@
       // call drawChart once google charts is loaded
       google.setOnLoadCallback(drawChart);
     </script>
+    <script>
+      // onload callback
+      function drawChartthresh() {
 
+        // JSONP request
+        setInterval(function(){
+        var jsonData = $.getJSON("NewServlet", function(result){
+        }).done(function(results){
+            
+          var data = new google.visualization.DataTable();
+          
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'y');
+          console.log("Holi");
+          $.each(results, function (index, pos) {
+              console.log(new Date(pos.x));
+            data.addRow([
+              (new Date(pos.x)),
+              parseFloat(pos.y)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart2').get(0));
+
+          chart.draw(data, {
+            title: 'Wimp Weather Station'
+          });
+
+        });
+    }, 500);
+      }
+  
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+    </script>
   </head>
   <body>
-    <div id="chart" style="width: 100%;"></div>
-    <script> setInterval(drawChart(), 3000); </script>
+      <div id="chart" style="width: 100%;"></div>
+      <div id="chart1" style="width: 100%;"></div>
+      <div id="chart2" style="width: 100%;"></div>
+    <script> setInterval(drawChartCelcius(), 3000); </script>
+    <script> setInterval(drawChartLux(), 3000); </script>
+    <script> setInterval(drawChartthresh(), 3000); </script>
   </body>
+  
 </html>
